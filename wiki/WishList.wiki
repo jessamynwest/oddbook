@@ -1,0 +1,9 @@
+#summary Things oddbook does not now do that it may do in the future.
+
+= WishList =
+
+Right now the main goal is to get the code over here. Once that's true there's some stuff that would be neat to see....
+
+  * Tags
+  * Easy Widgetizing
+  * Reporting - so export all ISBNs or something
