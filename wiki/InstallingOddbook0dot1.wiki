@@ -13,7 +13,7 @@ Oddbook-0.1 is experimental. Do not use this software unless you know enough PHP
 <li>Prepare an empty database in MySQL.</li>
 <li>In the oddbook files, locate */includes/ob_vars.inc* and */admin/includes/ob_vars.inc*.
 <li>In these files, locate the text block below and insert your database information:
-<pre>
+<code>
 /*
  * -------------------------------------------------------------------- 
  * Database information. 
@@ -32,4 +32,4 @@ $dbname = "";
 
 # set this to whatever year you started using Oddbook.
 $startyear = 2010;
-</pre>
+</code>
