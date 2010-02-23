@@ -1,0 +1,35 @@
+#summary Installing Oddbook-0.1
+#labels Featured
+
+= Introduction =
+
+Oddbook-0.1 is experimental. Do not use this software unless you know enough PHP and MySQL to get out of any trouble you may encounter.
+
+
+= Installation =
+
+<ol>
+<li>Extract the contents of the zip file onto your server.<li>
+<li>Prepare an empty database in MySQL.</li>
+<li>In the oddbook files, locate */includes/ob_vars.inc* and */admin/includes/ob_vars.inc*.
+<li>In these files, locate the text block below and insert your database information:
+<pre>
+/*
+ * -------------------------------------------------------------------- 
+ * Database information. 
+ * 
+ * Fill in the variables with the values specific to
+ * your system below.
+ *
+**/
+$dbhost = "";
+$dbuser = "";
+$dbpass = "";
+$dbname = "";
+/* 
+ * -------------------------------------------------------------------- 
+**/
+
+# set this to whatever year you started using Oddbook.
+$startyear = 2010;
+</pre>
