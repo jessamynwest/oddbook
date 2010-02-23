@@ -9,27 +9,39 @@ Oddbook-0.1 is experimental. Do not use this software unless you know enough PHP
 = Installation =
 
 <ol>
-<li>Extract the contents of the zip file onto your server.<li>
+<li>Extract the contents of the zip file onto your server.</li>
 <li>Prepare an empty database in MySQL.</li>
-<li>In the oddbook files, locate */includes/ob_vars.inc* and */admin/includes/ob_vars.inc*.
+<li>In the oddbook files, locate */includes/ob_vars.inc* and */admin/includes/ob_vars.inc*.</li>
 <li>In these files, locate the text block below and insert your database information:
 <code>
-/*
- * -------------------------------------------------------------------- 
- * Database information. 
- * 
- * Fill in the variables with the values specific to
- * your system below.
- *
-**/
-$dbhost = "";
-$dbuser = "";
-$dbpass = "";
-$dbname = "";
-/* 
- * -------------------------------------------------------------------- 
-**/
+# Fill in the variables with the values specific to
+# your system below.
 
-# set this to whatever year you started using Oddbook.
-$startyear = 2010;
+$dbhost = "www.example.com";
+$dbuser = "tinkerbell";
+$dbpass = "clapclapclap";
+$dbname = "myoddbookdb";
 </code>
+<li>In the file */schema_setup.php*, input each category you would like the booklist to keep track of.  This list can be added to through MySQL, but Oddbook's admin interface does not provide a way to change these later.
+<code>
+echo "Populating categories...\n";
+
+# Change these to fit your own tastes
+
+mysql_query("INSERT INTO category SET cat_name = 'fiction'");
+mysql_query("INSERT INTO category SET cat_name = 'science fiction'");
+mysql_query("INSERT INTO category SET cat_name = 'undersea adventure'");
+mysql_query("INSERT INTO category SET cat_name = 'ephemera'");
+mysql_query("INSERT INTO category SET cat_name = 'stuff with words'");
+</code></li>
+<li>Also in the */schema_setup.php* file, input the username and password you want to use with the Oddbook admin interface:
+<code>
+echo "Setting up admin user...\n";
+
+mysql_query("INSERT INTO users VALUES (
+		'tinkerbell', 
+		PASSWORD('clapclapclap')
+		)");
+</code></li>
+<li>Run the install script by visiting your website wherever Oddbook is installed, (ex. http://www.example.com/oddbook/schema_setup.php).  Running this script multiple times will have no effect once the tables are initially created.</li>
+<li>Oddbook is now ready to use!  Visit your administration page (ex. http://www.example.com/oddbook/admin/index.php) and log in to start populating your book list.
