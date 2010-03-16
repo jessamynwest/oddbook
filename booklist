@@ -1,0 +1,147 @@
+<?php
+
+/*
+ * This file is part of Oddbook.
+ *
+ * Oddbook is free software; you can redistribute it and/or modify it under
+ * the terms of the GNU General Public License as published by the Free
+ * Software Foundation; either version 2 of the License, or (at your
+ * option) any later version.
+ * 
+ * Oddbook is distributed in the hope that it will be useful, but WITHOUT
+ * ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ * FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+ * for more details.
+ * 
+ * You should have received a copy of the GNU General Public License along
+ * with Oddbook; if not, write to the Free Software Foundation, Inc.,  59
+ * Temple Place, Suite 330, Boston, MA  02111-1307  USA
+**/
+
+//include all the files that contain the actual functions...
+include('includes/ob_vars.inc');
+include('includes/ob_sidebar.inc');
+include('includes/ob_translate.inc');
+include('includes/ob_select.inc');
+include('includes/ob_search.inc');
+include('includes/ob_cats.inc');
+
+$logged_in = dn_validate_session();
+
+/*
+ * good form to have this generally. But also, the document
+ * will not validate as xhtml without it.
+ *
+**/
+header('Content-Type: text/html; charset=iso-8859-1', true);
+?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+<head>
+	<title>Oddbook</title>
+	
+	<style type="text/css" media="all">
+		@import url("<?= "$thisfile" ?>/../includes/reviewstyle.css");
+	</style>
+	
+	<link rel="stylesheet" type="text/css" href="<?= "$thisfile" ?>/../includes/main_reviewfont.css" title="main" />
+	<link rel="alternate stylesheet" type="text/css" href="<?= "$thisfile" ?>/../includes/alt_reviewfont.css" title="alt" />
+	<script type="text/javascript" src="<?= "$thisfile" ?>/../includes/switchitgood.js"></script>
+</head>
+<body>
+
+<a name="top"></a>
+
+<div id="main">
+
+	<a href="http://jessamyn.info/booklist"><img src="/pix/beenreading.jpg" width="227" height="35" alt="[I've been reading]" border="0" /></a>
+
+	<div id="navigate">
+	
+		<p><a  href="/index.rss"  title="rss feed"><img src="/pix/rss.jpg" alt="[get the rss feed here]" border="0" /></a></p>
+
+		<h1>{ search }</h1>
+		
+		<p>
+			<form style="margin: 0; padding: 0;" name="search" action="<?= $thisfile ?>" method="get">
+				<input class="search" type="text" size="12" name="s" id="s" />&nbsp;
+				<input class="button" type="submit" value="go" />
+			</form>
+		</p>
+		
+		<h1>{ see all the books }</h1>
+		
+		<p>
+			<a href="<?= "$thisfile/author" ?>">by author</a> ... <a href="<?= "$thisfile/title" ?>">by title</a><br />
+			
+			<strong>by rating</strong>:<br> 
+				[ <a href="<?= "$thisfile/rating/+" ?>">+</a> ] 
+				[ <a href="<?= "$thisfile/rating/0" ?>">0</a> ] 
+				[ <a href="<?= "$thisfile/rating/-" ?>">-</a> ] <br />
+
+				<strong>by category</strong>:<br> 
+				<?php dn_printcats(); ?>
+		</p>
+		
+		<? printmonths(); ?>
+
+		<h1>{ change the font }</h1>
+		
+		<p>
+			<a href="#" onclick="setActiveStyleSheet('main'); return false;">small</a> ... 
+			<a href="#" onclick="setActiveStyleSheet('alt'); return false;">big</a>
+		</p>
+
+	</div>  <!-- end /#navigate -->
+	
+	<div id="content">
+
+		<?
+
+		$directions = split("/", $pathstr);  // Get action from URI
+
+		switch ($directions[1]) {
+			case 'title':
+				select_by_title();  // booklist/title
+				break;
+			case 'author':
+				select_by_author();  // booklist/author
+				break;
+			case 'date':
+				if (strlen($directions[3]) > 0) {
+					select_by_month($directions[2],$directions[3]);  // booklist/date/2009/january
+				} else {
+					select_by_year($directions[2]);  // booklist/date/2009
+				}
+				break;
+			case 'book':
+				select_book($directions[2]);  // booklist/book/589
+				break;
+			case 'rating':
+				select_rating($directions[2]);  // booklist/rating/+
+				break;
+			case 'cat':
+				dn_select_by_cat($directions[2]);  // booklist/cat/biography
+				break;
+			default:
+				if(strlen($_GET['s']) > 0){
+					search($_GET['s']);
+				} else {
+					select_last_five();
+				}
+		}
+
+		?>
+
+		<p style="text-align:center;font-weight:bold;">&laquo; <a href="#top">top</a> &raquo;</p>
+
+	</div>  <!-- end #content -->
+
+	<br clear="all" />
+	
+</div>  <!-- end #main -->
+
+</body>
+</html>

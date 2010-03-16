@@ -1,0 +1,11 @@
+h1 {
+    text-align : center;
+}
+
+#forms {
+    width : 320px;
+    text-align : inherit;
+    margin-right : auto;
+    margin-left : auto;
+    border : 2px dotted black;
+}
