@@ -73,7 +73,8 @@ mysql_query("CREATE TABLE IF NOT EXISTS review (
 		author_id int(10), 
 		review_text longtext, 
 		review_date varchar(10), 
-		rating varchar(1)
+		rating varchar(1),
+		FULLTEXT (review_text)
 		)");
 
 echo mysql_error() . "\n";
@@ -85,7 +86,8 @@ mysql_query("CREATE TABLE IF NOT EXISTS author (
 		author_id int(10) NOT NULL AUTO_INCREMENT,
 		PRIMARY KEY (author_id),
 		lastname varchar(35),
-		firstname varchar(35)
+		firstname varchar(35),
+		FULLTEXT (lastname,firstname)
 		)");
 
 echo mysql_error() . "\n";
@@ -100,7 +102,8 @@ mysql_query("CREATE TABLE IF NOT EXISTS book (
 		title_sw varchar(100),
 		title varchar(100),
 		pubyear varchar(35),
-		ISBN varchar(35)
+		ISBN varchar(35),
+		FULLTEXT (title)
 		)");
 
 echo mysql_error() . "\n";
@@ -118,8 +121,6 @@ echo mysql_error() . "\n";
 
 
 echo "Populating categories...\n";
-
-// Change these to fit your own tastes
 
 mysql_query("INSERT INTO category SET cat_name = 'fiction'");
 mysql_query("INSERT INTO category SET cat_name = 'science fiction'");
@@ -153,8 +154,8 @@ echo mysql_error() . "\n";
 echo "Setting up admin user...\n";
 
 mysql_query("INSERT INTO users VALUES (
-		'this is where your username goes', 
-		PASSWORD('this is where your password goes')
+		'cowbellemoo', 
+		PASSWORD('password')
 		)");
 
 echo mysql_error() . "\n";
