@@ -1,0 +1,9 @@
+
+RewriteEngine on
+RewriteRule ^index\.rss /bookrss.php
+RewriteRule ^index\.rdf /bookrss.php
+RewriteRule ^index\.xml /bookrss.php
+
+<Files booklist>
+     ForceType application/x-httpd-php
+</Files>
