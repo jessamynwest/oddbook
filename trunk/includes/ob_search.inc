@@ -30,7 +30,7 @@ function search($text) {
 			match(review.review_text) against ('$text') or
 			match(author.lastname,author.firstname) against ('$text')
 			order by score desc;";
-	#print $sql;
+	// Note: There must be at least 3 records for FULLTEXT matching
 	$result = mysql_query($sql);
 
 	if(mysql_numrows($result) > 0) {
