@@ -2,7 +2,7 @@
 
 = WishList =
 
-Right now the main goal is to get the code over here. Once that's true there's some stuff that would be neat to see....
+There's some stuff that would be neat to see....
 
   * Tags
   * Easy Widgetizing
