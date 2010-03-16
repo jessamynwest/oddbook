@@ -154,8 +154,8 @@ echo mysql_error() . "\n";
 echo "Setting up admin user...\n";
 
 mysql_query("INSERT INTO users VALUES (
-		'cowbellemoo', 
-		PASSWORD('password')
+		'tinkerbell', 
+		PASSWORD('clapclapclap')
 		)");
 
 echo mysql_error() . "\n";
