@@ -1,37 +1,45 @@
 <?
-require_once("includes/ob_translate.inc");
-require_once('includes/ob_cats.inc');
+include('includes/ob_vars.inc');
+include('includes/ob_sidebar.inc');
+include('includes/ob_translate.inc');
+include('includes/ob_select.inc');
+include('includes/ob_search.inc');
+include('includes/ob_cats.inc');
+
 header('Content-Type: text/xml; charset=iso-8859-1', true);
-# variables
-define(TITLE, "Jessamyn.info: What I've Been Reading");
+
+// variables
+define(TITLE, "Oddbook");
 define(ENTRIES, "15");
-define(DESCR, "The ongoing book list of Jessamyn West, Librarian");
-
-# DB information
-define(DBHOST, "database");
-define(DBUSER, "user");
-define(DBPASS, "pwd");
-define(DBNAME, "database_name");
-
-# Some URL stuff
-define(BASEURL, "Hostaddress/booklist/book/");
+define(DESCR, "A book list.");
+define(LINK, "http://www.example.com/");
+// Some URL stuff
+define(BASEURL, "http://www.example.com/oddbook/booklist/book/");
 
 function rssheader() {
-	echo "<?xml  version=\"1.0\"?>\n". 
-	"<rss version=\"0.92\">\n".
-	"<channel><title>". TITLE ."</title>\n".
-	"<description>". DESCR ."</description>\n".
-	"<link>http://jessamyn.info/booklist</link>\n\n";
+	echo "<?xml  version=\"1.0\" encoding=\"iso-8859-1\"?>\n". 
+		"<rss version=\"2.0\">\n".
+		"  <channel>\n".
+		"    <title>". TITLE ."</title>\n".
+		"    <link>". LINK ."</link>\n".
+		"    <description>". DESCR ."</description>\n" .
+		"    <language>en-us</language>\n" .
+		"    <lastBuildDate>" . date(DATE_RFC822) . "</lastBuildDate>\n" .
+		"    <ttl>" . ENTRIES . "</ttl>\n";
 }
 
 function rssfooter() {
-	echo "</channel>\n</rss>\n";
+	echo "  </channel>\n".
+		"</rss>";
 }
 
 function rss() {
 	rssheader();
-	mysql_connect(DBHOST, DBUSER, DBPASS);
-	mysql_select_db(DBNAME);
+
+	global $dbhost,$dbuser,$dbpass,$dbname;
+	
+	mysql_connect($dbhost, $dbuser,$dbpass);
+	mysql_select_db($dbname);
 
 	$res = mysql_query("select review.review_id as review_id,review.book_id 
 	       as book,review.author_id as auth,review.review_text as text,
@@ -57,11 +65,16 @@ function rss() {
             $cat_value = '<category>'.implode( '</category> <category>', $cats ).'</category>';
         }
         //
-		echo "<item><title>" . translate($row['sw'] . " " . $row['title'] . " by ". $row['auth_f'] ." " . $row['auth_l'])  . 
-		"</title><description><![CDATA[";
+		echo "    <item>\n".
+			"      <title>" . $row['title'] . " by " . $row['auth_f'] ." " . $row['auth_l'] . 
+			"</title>\n" .
+			"      <link>" . BASEURL . $row['review_id'] ."</link>\n".
+			"      <description>";
 		array_push($row,$fp);
 		render_review($row, false);
-		echo "]]></description><link>". BASEURL . $row['review_id'] ."</link>$cat_value</item>";
+		echo "</description>\n".
+			"<guid>" . BASEURL . $row['review_id'] . "</guid>\n" .
+			"    </item>\n";
 		
 	}
 	fclose($fp);

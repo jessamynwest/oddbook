@@ -56,11 +56,11 @@ header('Content-Type: text/html; charset=iso-8859-1', true);
 
 <div id="main">
 
-	<a href="http://jessamyn.info/booklist"><img src="/pix/beenreading.jpg" width="227" height="35" alt="[I've been reading]" border="0" /></a>
+	<h1><a href="/oddbook/booklist">Oddbook</a></h1>
 
 	<div id="navigate">
 	
-		<p><a  href="/index.rss"  title="rss feed"><img src="/pix/rss.jpg" alt="[get the rss feed here]" border="0" /></a></p>
+		<p><a  href="/oddbook/bookrss.php"  title="rss feed"><img src="/pix/rss.jpg" alt="[get the rss feed here]" border="0" /></a></p>
 
 		<h1>{ search }</h1>
 		
