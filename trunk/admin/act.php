@@ -17,6 +17,7 @@
  * Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **/
 
+include_once("../ob_config.php");
 include("./includes/ob_vars.inc");
 include("./includes/ob_actions.inc");
 

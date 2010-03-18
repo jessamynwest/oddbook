@@ -22,25 +22,6 @@
  * ====================================================================
 **/
 
-/*
- * -------------------------------------------------------------------- 
- * Database information. 
- * 
- * Fill in the variables with the values specific to
- * your system below.
- *
-**/
-$dbhost = "";
-$dbuser = "";
-$dbpass = "";
-$dbname = "";
-/* 
- * -------------------------------------------------------------------- 
-**/
-
-# set this to whatever year you started using Oddbook.
-$startyear = 2010;
-
 //non-customized variables we'll need throughout the application.
 $thisfile = getenv("SCRIPT_NAME");
 $pathstr = getenv("PATH_INFO");

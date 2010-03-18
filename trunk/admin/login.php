@@ -17,12 +17,13 @@
  * Temple Place, Suite 330, Boston, MA  02111-1307  USA
 **/
 
+include_once("../ob_config.php");
 include("./includes/ob_vars.inc");
 
 if( $ok ) {
 	if ( $_GET['action'] == 'logout' ) {
 		dn_end_session( $_COOKIE['obSessID'] );
-		header("Location: /booklist");
+		header("Location: {$oddbookInstallDir}/{$indexFilename}");
 		exit;
 	}
 	echo "$ok | Logged in. | <a href='login.php?action=logout'>logout</a>";

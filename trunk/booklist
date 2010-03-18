@@ -19,6 +19,7 @@
 **/
 
 //include all the files that contain the actual functions...
+include_once("ob_config.php");
 include('includes/ob_vars.inc');
 include('includes/ob_sidebar.inc');
 include('includes/ob_translate.inc');
@@ -40,7 +41,7 @@ header('Content-Type: text/html; charset=iso-8859-1', true);
 
 <html>
 <head>
-	<title>Oddbook</title>
+	<title><?php echo $siteTitle; ?></title>
 	
 	<style type="text/css" media="all">
 		@import url("<?= "$thisfile" ?>/../includes/reviewstyle.css");
@@ -56,11 +57,11 @@ header('Content-Type: text/html; charset=iso-8859-1', true);
 
 <div id="main">
 
-	<h1><a href="/oddbook/booklist">Oddbook</a></h1>
+	<h1><a href="<?php echo $fullURLToOddbook; ?>"><?php echo $siteTitle; ?></a></h1>
 
 	<div id="navigate">
 	
-		<p><a  href="/oddbook/bookrss.php"  title="rss feed"><img src="/pix/rss.jpg" alt="[get the rss feed here]" border="0" /></a></p>
+		<h1>{ <a href="<?php echo $baseURLforOddbook; ?>/bookrss.php" title="rss feed">rss</a> }</h1>
 
 		<h1>{ search }</h1>
 		

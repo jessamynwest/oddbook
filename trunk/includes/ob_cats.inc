@@ -353,6 +353,7 @@ function dn_begin_session( $sessID='' ) {
  * @return boolean true if userID and password are valid, or false
  */
 function dn_end_session( $sessID ) {
+
 	if ( empty($sessID) ) {
 		return false;
 	}

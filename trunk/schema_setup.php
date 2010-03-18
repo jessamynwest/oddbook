@@ -7,7 +7,7 @@
 	Created: 2/13/2010 by Jeff Hearn (cowbellemoo@gmail.com)
 
 */
-
+include_once("ob_config.php");
 include('includes/ob_vars.inc');
 include('includes/ob_sidebar.inc');
 include('includes/ob_translate.inc');
@@ -122,11 +122,9 @@ echo mysql_error() . "\n";
 
 echo "Populating categories...\n";
 
-mysql_query("INSERT INTO category SET cat_name = 'fiction'");
-mysql_query("INSERT INTO category SET cat_name = 'science fiction'");
-mysql_query("INSERT INTO category SET cat_name = 'undersea adventure'");
-mysql_query("INSERT INTO category SET cat_name = 'ephemera'");
-mysql_query("INSERT INTO category SET cat_name = 'stuff with words'");
+foreach ($initialCategories as $i) {
+	mysql_query("INSERT INTO category SET cat_name = '{$i}'");
+}
 
 echo mysql_error() . "\n";
 
@@ -154,8 +152,8 @@ echo mysql_error() . "\n";
 echo "Setting up admin user...\n";
 
 mysql_query("INSERT INTO users VALUES (
-		'tinkerbell', 
-		PASSWORD('clapclapclap')
+		'{$adminUsername}', 
+		PASSWORD('{$adminPassword}')
 		)");
 
 echo mysql_error() . "\n";
