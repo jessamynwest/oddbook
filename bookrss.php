@@ -1,4 +1,5 @@
 <?
+include('ob_config.php');
 include('includes/ob_vars.inc');
 include('includes/ob_sidebar.inc');
 include('includes/ob_translate.inc');
@@ -8,24 +9,19 @@ include('includes/ob_cats.inc');
 
 header('Content-Type: text/xml; charset=iso-8859-1', true);
 
-// variables
-define(TITLE, "Oddbook");
-define(ENTRIES, "15");
-define(DESCR, "A book list.");
-define(LINK, "http://www.example.com/");
-// Some URL stuff
-define(BASEURL, "http://www.example.com/oddbook/booklist/book/");
-
 function rssheader() {
+
+	global $baseURLforOddbook, $siteTitle, $siteDescription, $rssMaxEntries, $pathstr, $baseURLforOddbook, $fullURLToOddbook;
+
 	echo "<?xml  version=\"1.0\" encoding=\"iso-8859-1\"?>\n". 
 		"<rss version=\"2.0\">\n".
 		"  <channel>\n".
-		"    <title>". TITLE ."</title>\n".
-		"    <link>". LINK ."</link>\n".
-		"    <description>". DESCR ."</description>\n" .
+		"    <title>". $siteTitle ."</title>\n".
+		"    <link>". $fullURLToOddbook ."</link>\n".
+		"    <description>". $siteDescription ."</description>\n" .
 		"    <language>en-us</language>\n" .
 		"    <lastBuildDate>" . date(DATE_RFC822) . "</lastBuildDate>\n" .
-		"    <ttl>" . ENTRIES . "</ttl>\n";
+		"    <ttl>" . $rssMaxEntries . "</ttl>\n";
 }
 
 function rssfooter() {
@@ -37,6 +33,7 @@ function rss() {
 	rssheader();
 
 	global $dbhost,$dbuser,$dbpass,$dbname;
+	global $baseURLforOddbook, $siteTitle, $siteDescription, $rssMaxEntries, $pathstr, $baseURLforOddbook, $fullURLToOddbook;
 	
 	mysql_connect($dbhost, $dbuser,$dbpass);
 	mysql_select_db($dbname);
@@ -53,7 +50,7 @@ function rss() {
            from review
            inner join author on author.author_id = review.author_id
            inner join book on book.book_id = review.book_id
-           order by review.review_date desc limit ".ENTRIES.";");
+           order by review.review_date desc limit ".$rssMaxEntries.";");
 
 	$fp = fopen("includes/templates/rssreview.tmpl",r);
 	while($row = mysql_fetch_assoc($res)) {
@@ -68,12 +65,12 @@ function rss() {
 		echo "    <item>\n".
 			"      <title>" . $row['title'] . " by " . $row['auth_f'] ." " . $row['auth_l'] . 
 			"</title>\n" .
-			"      <link>" . BASEURL . $row['review_id'] ."</link>\n".
+			"      <link>" . $fullURLToOddbook . "/book/" . $row['review_id'] ."</link>\n".
 			"      <description>";
 		array_push($row,$fp);
 		render_review($row, false);
 		echo "</description>\n".
-			"<guid>" . BASEURL . $row['review_id'] . "</guid>\n" .
+			"<guid>" . $fullURLToOddbook . "/book/" . $row['review_id'] . "</guid>\n" .
 			"    </item>\n";
 		
 	}

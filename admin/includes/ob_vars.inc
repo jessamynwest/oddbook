@@ -31,10 +31,9 @@
  * your system below.
  *
 **/
-$dbhost = "";
-$dbuser = "";
-$dbpass = "";
-$dbname = "";
+
+// User/Site Settings
+
 
 //other files to link to...
 $index = "index.php";

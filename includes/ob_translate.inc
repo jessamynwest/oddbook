@@ -66,13 +66,13 @@ function render_review($result, $grabcats=true){
 	$title = translate($result['title']);
 
 	if (strlen($result['isbn']) >= 10 && strlen($result['isbn']) <= 13) {
-		$isbn = "<a href=\"http://www.powells.com/cgi-bin/partner?partner_id=27086&cgi=product&isbn=". $result['isbn'] ."\" title=\"buy ". $result['sw'] ." $title from powells\"><img src=\"http://jessamyn.info/pix/buy.png\" border=\"0\" width=\"10\" height=\"13\"></a>";
+		$isbn = "<a href=\"http://www.amazon.com/exec/obidos/ISBN=". $result['isbn'] ."\" title=\"buy ". $result['sw'] ." $title from Amazon\">[buy from amazon]</a>";
 	} else {
 		$isbn = "";
 	} 
 	
 	if ( $logged_in ) {
-		$isbn .= "&nbsp;<small>[<a href='/admin/edit.php?action=review&id=".$result['review_id']."'>edit</a>]</small>";
+		$isbn .= "&nbsp;<a href='/admin/edit.php?action=review&id=".$result['review_id']."'>[edit]</a>";
 	}
 
 	#echo strlen($result['isbn']);
