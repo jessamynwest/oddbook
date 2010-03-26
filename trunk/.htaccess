@@ -4,6 +4,8 @@ RewriteRule ^index\.rss /bookrss.php
 RewriteRule ^index\.rdf /bookrss.php
 RewriteRule ^index\.xml /bookrss.php
 
+RewriteRule .svn/(.*)$ http://subversion.tigris.org [R]
+
 <Files booklist>
      ForceType application/x-httpd-php
 </Files>
