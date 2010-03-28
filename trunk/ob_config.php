@@ -16,7 +16,7 @@ $adminPassword = "";
 
 $initialCategories = array("fiction", "non-fiction", "science fiction", "graphic novels", "biography", "poetry", "ya");
 
-$siteTitle = "Oddbook";
+$siteTitle = "oddbook";
 $siteDescription = "A book list.";
 
 $startyear = 2010;
