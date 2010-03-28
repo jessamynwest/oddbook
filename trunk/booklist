@@ -61,18 +61,9 @@ header('Content-Type: text/html; charset=iso-8859-1', true);
 
 	<div id="navigate">
 	
-		<h1>{ <a href="<?php echo $baseURLforOddbook; ?>/bookrss.php" title="rss feed">rss</a> }</h1>
+		
 
-		<h1>{ search }</h1>
-		
-		<p>
-			<form style="margin: 0; padding: 0;" name="search" action="<?= $thisfile ?>" method="get">
-				<input class="search" type="text" size="12" name="s" id="s" />&nbsp;
-				<input class="button" type="submit" value="go" />
-			</form>
-		</p>
-		
-		<h1>{ see all the books }</h1>
+		<h1>{ my books }</h1>
 		
 		<p>
 			<a href="<?= "$thisfile/author" ?>">by author</a> ... <a href="<?= "$thisfile/title" ?>">by title</a><br />
@@ -86,6 +77,15 @@ header('Content-Type: text/html; charset=iso-8859-1', true);
 				<?php dn_printcats(); ?>
 		</p>
 		
+		<h1>{ search }</h1>
+		
+		<p>
+			<form style="margin: 0; padding: 0;" name="search" action="<?= $thisfile ?>" method="get">
+				<input class="search" type="text" size="12" name="s" id="s" />&nbsp;
+				<input class="button" type="submit" value="go" />
+			</form>
+		</p>
+		
 		<? printmonths(); ?>
 
 		<h1>{ change the font }</h1>
@@ -94,6 +94,12 @@ header('Content-Type: text/html; charset=iso-8859-1', true);
 			<a href="#" onclick="setActiveStyleSheet('main'); return false;">small</a> ... 
 			<a href="#" onclick="setActiveStyleSheet('alt'); return false;">big</a>
 		</p>
+		
+		<h1>{ <a href="<?php echo $baseURLforOddbook; ?>/bookrss.php" title="rss feed">rss</a> }</h1>
+		
+		<br/><br/>
+		
+		<a href="http://code.google.com/p/oddbook/"><img src="<?php echo $baseURLforOddbook ?>/images/oddbook-logo.png" /></a>
 
 	</div>  <!-- end /#navigate -->
 	

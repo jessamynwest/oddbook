@@ -43,8 +43,10 @@ function translate() {
     return preg_replace($patterns,$replacements,$thestring);
 }
 
-function render_review($result, $grabcats=true){
-	global $thisfile, $logged_in;
+function render_review($result, $grabcats=true)
+{
+
+	global $thisfile, $logged_in, $baseURLforOddbook, $fullURLToOddbook;
 
 	// Grab book category links
 	if ( $grabcats ) {
@@ -65,19 +67,31 @@ function render_review($result, $grabcats=true){
 
 	$title = translate($result['title']);
 
+	// Publication Year 
+	// wrap in parens if there's something there
+	$pubYear = $result['pubyear'];
+	if ( strlen ( $pubYear ) != 0 )
+	{
+		$pubYear = "(" . $pubYear . ")";
+	}
+
+	$permalink = "<a href=\"" . $fullURLToOddbook . "/book/" . $result['review_id'] . "\">" .
+		"<img src=\"" . $baseURLforOddbook . "/images/permalink.png\" title=\"permalink\" /></a>";
+
+	// Affiliate Link
 	if (strlen($result['isbn']) >= 10 && strlen($result['isbn']) <= 13) {
-		$isbn = "<a href=\"http://www.amazon.com/exec/obidos/ISBN=". $result['isbn'] ."\" title=\"buy ". $result['sw'] ." $title from Amazon\">[buy from amazon]</a>";
+		$isbn = "<a href=\"http://www.amazon.com/exec/obidos/ISBN=". $result['isbn'] ."\" title=\"buy ". $result['sw'] ." $title from Amazon\">" .
+			"<img src=\"" . $baseURLforOddbook . "/images/buy.png\"/></a>";
 	} else {
 		$isbn = "";
 	} 
 	
+	// Edit link
 	if ( $logged_in ) {
-		$isbn .= "&nbsp;<a href='/admin/edit.php?action=review&id=".$result['review_id']."'>[edit]</a>";
+		$isbn .= "&nbsp;<a href='" . $baseURLforOddbook . "/admin/edit.php?action=review&id=" . $result['review_id'] . "'>[edit]</a>";
 	}
 
-	#echo strlen($result['isbn']);
-
-	//first, get translation out of the way.
+	// first, get translation out of the way.
 	$trans_elements = array($title,
 					translate($result['auth_f']),
 					translate($result['auth_l']),
@@ -85,7 +99,7 @@ function render_review($result, $grabcats=true){
 					$isbn
 	);
 
-	//now set up two arrays that will replace the elements
+	// now set up two arrays that will replace the elements
 	$review_elements = array("/##sw##/",
 					"/##title##/",
 					"/##link##/",
@@ -101,9 +115,9 @@ function render_review($result, $grabcats=true){
 
 	$review_replace = array($result['sw'],
 					$trans_elements[0],
-					"$thisfile/book/" . $result['review_id'],
+					$permalink,
 					$trans_elements[1] . " " . $trans_elements[2],
-					$result['pubyear'],
+					$pubYear,
 					$result['review_day'] . " " . $result['review_month'] . " " . $result['review_year'],
 					$cat_label,
 					$cat_value,
