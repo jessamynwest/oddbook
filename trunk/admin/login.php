@@ -22,8 +22,12 @@ include("./includes/ob_vars.inc");
 
 if( $ok ) {
 	if ( $_GET['action'] == 'logout' ) {
+	
+		session_start();
+		session_destroy();
+	
 		dn_end_session( $_COOKIE['obSessID'] );
-		header("Location: {$oddbookInstallDir}/{$indexFilename}");
+		header("Location: {$oddbookInstallDir}/admin");
 		exit;
 	}
 	echo "$ok | Logged in. | <a href='login.php?action=logout'>logout</a>";
@@ -46,8 +50,7 @@ $pw = mysql_escape_string( $pw );
 $validLogin = dn_validate_login( $user, $pw );
 if ( $validLogin ) {
 	dn_begin_session( $user );
-	
-	
+		
 	/* echo "<pre>\n";
 	$sessID = $user;
 	$sessFile = "/f5/cowbellemoo/home/protected/cowbellemoo";

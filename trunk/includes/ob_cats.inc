@@ -357,10 +357,6 @@ function dn_end_session( $sessID ) {
 	if ( empty($sessID) ) {
 		return false;
 	}
-	if ( !@unlink( SESS_DIR.$sessID ) ) {
-		return false;
-	}
-
 	if ( !setcookie( 'obSessID', '', 0, '/' ) ) {
 		return false;
 	}
