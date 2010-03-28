@@ -2,71 +2,73 @@
 "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
-<title>add a review</title>
-<style type="text/css">
-body {
-  font-family:verdana,geneva,arial,sans-serif;
-  background-color : #ffffff;
-  text-align : center;
-}
+	<title>add a review</title>
+	<style type="text/css">
 
-h1 {
-  font-size : 16px;
-  font-weight:bold;
-}
+	body {
+		font-family:verdana,geneva,arial,sans-serif;
+		background-color : #ffffff;
+		text-align : center;
+	}
 
-h2 {
-  font-size : 14px;
-  font-weight:bold;
-}
+	h1 {
+		font-size : 16px;
+		font-weight:bold;
+	}
 
-p {
-  font-size : 12px;
-}
+	h2 {
+		font-size : 14px;
+		font-weight:bold;
+	}
 
-a {
-  color : #866A83;
-  font-weight : bold;
-  text-decoration : none;
-}
+	p {
+		font-size : 12px;
+	}
 
-a:hover {
-  color : #666633;
-  text-decoration : underline;
-}
+	a {
+		color : #866A83;
+		font-weight : bold;
+		text-decoration : none;
+	}
 
-#forms {
-  width : 600px;
-padding-top: 20px;
-  padding-left: 20px;
-  border : 1px solid thistle;
-  margin-left : auto;
-  margin-right :auto;
-  text-align : left;
-}
+	a:hover {
+		color : #666633;
+		text-decoration : underline;
+	}
 
-.formtext {
-  font-size : 11px;
-  font-weight : bold;
-}
+	#forms {
+		width : 600px;
+		padding-top: 20px;
+		padding-left: 20px;
+		border : 1px solid thistle;
+		margin-left : auto;
+		margin-right :auto;
+		text-align : left;
+	}
 
-.forminput {
-font-family : verdana,geneva,arial,sans-serif;
-  font-size : 14px;
-}
+	.formtext {
+		font-size : 11px;
+		font-weight : bold;
+	}
+
+	.forminput {
+		font-family : verdana,geneva,arial,sans-serif;
+		font-size : 14px;
+		max-width: 570px;
+	}
 
 </style>
 
 <script language="JavaScript">
-function popener(fileName,windowName) {
-    window.name = "hello";
-    window.open(fileName,windowName,'directories=false,height=350,width=435,menubar=false,resizeable=false,status=true,toolbar=false');
-}
+	function popener(fileName,windowName) {
+	    window.name = "hello";
+	    window.open(fileName,windowName,'directories=false,height=350,width=435,menubar=false,resizeable=false,status=true,toolbar=false');
+	}
 
-function closeDown() {
-    window.opener.location.reload();
-    window.close();
-}
+	function closeDown() {
+	    window.opener.location.reload();
+	    window.close();
+	}
 </script>
 
 </head>
